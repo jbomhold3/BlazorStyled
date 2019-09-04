@@ -270,7 +270,10 @@ namespace BlazorStyled
 
         private string RenderAsString()
         {
+            
             string result = string.Empty;
+            //  result = ChildContent.
+            /*
             try
             {
                 ParameterView paramView = ParameterView.FromDictionary(new Dictionary<string, object>() { { "ChildContent", ChildContent } });
@@ -281,11 +284,20 @@ namespace BlazorStyled
             catch
             {
                 //ignored dont crash if can't get result
-            }
+            }*/
+
+
+            //  System.Runtime.Serialization.SerializationInfo info = new System.Runtime.Serialization.SerializationInfo( typeof(KeyValuePair<string,string>),null ) ;
+            //System.Runtime.Serialization.StreamingContext test;
+
+            // ChildContent.
+            var RenderTreeBuilder = new RenderTreeBuilder();
+            ChildContent.Invoke(RenderTreeBuilder);
+            //result = RenderTreeBuilder;
             return result;
         }
 
-        private IEnumerable<string> GetResult(Task<ComponentRenderedText> task)
+       /* private IEnumerable<string> GetResult(Task<ComponentRenderedText> task)
         {
             if (task.IsCompleted && task.Status == TaskStatus.RanToCompletion && !task.IsFaulted && !task.IsCanceled)
             {
@@ -296,7 +308,7 @@ namespace BlazorStyled
                 ExceptionDispatchInfo.Capture(task.Exception).Throw();
                 throw new InvalidOperationException("We will never hit this line");
             }
-        }
+        }*/
 
         public void OnCompleted()
         {

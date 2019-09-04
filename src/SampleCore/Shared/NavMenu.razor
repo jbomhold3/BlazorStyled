@@ -1,5 +1,5 @@
 ﻿@inject IStyled Styled
-@inject IUriHelper UriHelper
+@inject NavigationManager UriHelper
 
 <Styled @bind-Classname="@ul">
     display: inline-flex;
@@ -126,10 +126,10 @@
 
     protected override void OnInitialized()
     {
-        UriHelper.OnLocationChanged += OnLocationChanged;
+        UriHelper.LocationChanged += OnLocationChanged;
     }
 
-    private void MyOnClick(UIMouseEventArgs e)
+    private void MyOnClick(MouseEventArgs e)
     {
         _open = !_open;
         nav = _open ? string.Empty : hiddenOnSmall;
